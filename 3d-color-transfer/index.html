@@ -1,0 +1,751 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3D Color Transfer</title>
+
+  <!-- Import -->
+  <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.10.1.js"></script>
+
+  <script type="text/javascript" src="./js/zip.js"></script>
+  <script type="text/javascript" src="./js/zip-ext.js"></script>
+  <script type="text/javascript" src="./js/HttpProgressReader.js"></script>
+  <script type="text/javascript" src="https://apps.sketchfab.com/web-importer/sketchfab-importer.js"></script>
+  <script> zip.workerScriptsPath = './js/';</script>
+
+  <script type="text/javascript" src="./js/three.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+  <script type="text/javascript" src="./js/OrbitControls.js"></script>
+  <script type="text/javascript" src="http://mlweb.loria.fr/lalolib.js"></script>
+
+  <script type="text/javascript" src="./js/Utils.js"></script>
+  <script type="text/javascript" src="./js/Downloader.js"></script>
+  <script type="text/javascript" src="./js/ColorTransfer.js"></script>
+  <script type="text/javascript" src="./js/Shaders.js"></script>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+
+  <style>
+    html,body {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid h-100">
+
+    <div class="row justify-content-center h-100" style="background-color:#fafafa">
+
+      <div class="col-2 pt-3 pl-4">
+        <div class="row pl-3">
+          <h2> 3D color transfer </h2>
+          <h3 style="color:#EE0000"> under maintenance! </h3>
+          <p style="color:#EE0000"> Sorry, something has broken... I'm on it! </h3>
+        </div>
+
+
+        <hr class="solid ml-2" style="width: 80%">
+
+        <div class="row pr-4">
+          <p class="text-justify pl-1" style="width: 95%">
+            You can import your own models from the Sketchfab library.
+            Connect your Sketchfab account and search a model.
+            The model will be imported in the selected viewer below:
+          </p>
+          <select class="custom-select" style="width: 98%" name="method" id="select-viewer">
+            <option value="a" selected>Left viewer</option>
+            <option value="b">Right viewer</option>
+          </select>
+        </div>
+
+        <div class="row w-100 pt-3" style="height: 72%">
+          <div class="border skfb-widget"></div>
+        </div>
+      </div>
+
+
+      <!-- VIEWERS -->
+      <div class="col">
+        <div class="row justify-content-center h-100 pt-3">
+          <div class="col">
+
+            <div class="row">
+              <div class="col-2">
+                <h5>Load an example</h5>
+                <select class="custom-select" name="method" id="select-example">
+                  <option value="1" selected>Furniture</option>
+                  <option value="2">Exterior</option>
+                  <option value="3">Interior</option>
+                  <option value="0">Aging</option>
+                </select>
+              </div>
+
+              <div class="col-2">
+                <h5>Select a method</h5>
+                <select class="custom-select" name="method" id="select-method">
+                  <option value="0">IGD</option>
+                  <option value="1">MGD</option>
+                  <option value="2">IGD_N</option>
+                  <option value="3" selected>MGD_N</option>
+                </select>
+              </div>
+
+              <div class="col-2">
+                <label for="switchTransfer"><h5>Transfer</h5></label>
+                <span class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom"
+                title="The transfer is able when both models are loaded."></span>
+                <input type="range" class="custom-range" min="0" max="100" value="0" id="switchTransfer" disabled>
+              </div>
+
+              <div class="col-6 px-5">
+                <div class="row justify-content-end">
+                  <span class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom"
+                  title="Improve the color transfer by increasing the precision... it may take a while."></span>
+                  <p class="ml-1 mr-3" id="text-precision">Precision: 1</p>
+
+                  <button type="button" class="border btn btn-light btn-sm mr-1" style="height: 50%" id="decrease-precision" disabled>
+                    <span class="fa fa-minus" style="font-size:80%"></span>
+                  </button>
+                  <button type="button" class="border btn btn-light btn-sm" style="height: 50%" id="increase-precision" disabled>
+                    <span class="fa fa-plus" style="font-size:80%"></span>
+                  </button>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="row pt-3" style="height: 92%;">
+              <div class="col">
+                <div class="row" style="width: 100%; height: 97%">
+                  <iframe style="width: 100%; height: 100%" src="" id="api-frame-a" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                </div>
+
+                <div class="row justify-content-center pt-1" style="width: 100%">
+                  <div class="progress" style="width: 100%">
+                    <div class="progress-bar" id="progressbar-a" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="align-self-center col-auto">
+                <button type="button" class="border btn btn-light mr-4" id="switch-viewer">
+                  <span class="fa fa-arrow-right" style="font-size:200%"  id="switch-arrow"></span>
+                </button>
+              </div>
+
+              <div class="col">
+                <div class="row" style="width: 100%; height: 97%">
+                  <iframe style="width: 100%; height: 100%" src="" id="api-frame-b" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                </div>
+
+                <div class="row justify-content-center pt-1" style="width: 100%">
+                  <div class="progress" style="width: 100%">
+                    <div class="progress-bar" id="progressbar-b" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Initialize the viewer -->
+  <script type="text/javascript">
+
+  //////////////////////////////////////////////////////////////////////////////
+  // TODO:
+  //  - Fix IGD_N
+  //  - Find other examples
+  //////////////////////////////////////////////////////////////////////////////
+
+  // console.log(document.getElementById('precision-tooltip'));
+  // document.getElementById('precision-tooltip').tooltip('show');
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+
+  // User parameters
+  var u_precision = 32;  // corresponds to mipmap texture level
+  var u_transferMethod = 3;
+  var u_switchTransfer = 0;
+  var importViewer = "a";
+  var transferViewer = "b";
+
+  // Init viewer A
+  var viewer_a = {};
+  var iframe_a = document.getElementById( 'api-frame-a' );
+  // viewer_a.client = new Sketchfab( iframe_a );
+
+  // Init viewer B
+  var viewer_b = {};
+  var iframe_b = document.getElementById( 'api-frame-b' );
+  // viewer_b.client = new Sketchfab( iframe_b );
+
+  // ThreeJS objects
+  var bufferRenderer = new THREE.WebGLRenderer();
+  bufferRenderer.autoClear = false;
+  var bufferScene = new THREE.Scene();
+  var bufferCamera = new THREE.PerspectiveCamera( 75, 1.0, 0.1, 1000 );
+  bufferScene.add(bufferCamera);
+
+
+  // GUI
+  var sliderTransfer = document.getElementById("switchTransfer");
+  sliderTransfer.value = 0;
+  sliderTransfer.oninput = function() {
+    u_switchTransfer = this.value / 100.0;
+    colorTransfer();
+  };
+
+  document.getElementById('select-viewer').onchange = function(){
+    importViewer = this.value;
+  };
+
+  document.getElementById('switch-viewer').onclick = function(){
+    sliderTransfer.value = 0;
+    u_switchTransfer = 0.0;
+    colorTransfer();
+
+    if(transferViewer == "b") {
+      transferViewer = "a";
+      document.getElementById('switch-arrow').setAttribute('class', 'fa fa-arrow-left');
+    } else {
+      transferViewer = "b";
+      document.getElementById('switch-arrow').setAttribute('class', 'fa fa-arrow-right');
+    }
+    tryAssignShaderValues();
+  };
+
+  document.getElementById('select-example').onchange = function() {
+    if (this.value == 0) {
+      loadExampleAging();
+    } else if (this.value == 1) {
+      loadExampleFurniture();
+    } else if (this.value == 2) {
+      loadExampleExterior();
+    } else if (this.value == 3) {
+      loadExampleInterior();
+    }
+  };
+
+  document.getElementById('select-method').onchange = function() {
+    u_transferMethod = this.value;
+    colorTransfer();
+  };
+
+  var progressA = document.getElementById("progressbar-a");
+  var progressB = document.getElementById("progressbar-b");
+
+  document.getElementById('decrease-precision').onclick = function() {
+    u_precision /= 2;
+    var p = Math.log(u_precision/32) / Math.log(2) + 1;
+    document.getElementById('text-precision').textContent = "Precision: " + p;
+
+    prepare(viewer_a, progressA);
+    prepare(viewer_b, progressB);
+  };
+
+  document.getElementById('increase-precision').onclick = function() {
+    u_precision *= 2;
+    var p = Math.log(u_precision/32) / Math.log(2) + 1;
+    document.getElementById('text-precision').textContent = "Precision: " + p;
+
+    prepare(viewer_a, progressA);
+    prepare(viewer_b, progressB);
+  };
+
+
+
+
+  // EXAMPLES
+  loadExampleFurniture();
+
+  function loadExampleAging() {
+    // Mossy stamp
+    var mossy_stump = {};
+    mossy_stump.uid = "f0c8eb392c3945bcb5da60b9fae4396d";
+    mossy_stump.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/mossy_stump.zip";
+    initClient(viewer_a, iframe_a, mossy_stump.uid);
+    download(viewer_a, mossy_stump.url, progressA);
+
+    // Bodhi
+    var bodhisattva = {};
+    bodhisattva.uid = "062edd8db2324facb86c92bf2e81cdbc";
+    bodhisattva.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/bodhisattva.zip";
+    initClient(viewer_b, iframe_b, bodhisattva.uid);
+    download(viewer_b, bodhisattva.url, progressB);
+  }
+
+  function loadExampleFurniture() {
+    // Chair
+    var chair = {};
+    chair.uid = "81f02b969bca49d6b028477714e8e989";
+    chair.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/chair.zip";
+    initClient(viewer_a, iframe_a, chair.uid);
+    download(viewer_a, chair.url, progressA);
+
+    // Turin chair
+    var turin = {};
+    turin.uid = "cf555eea9d634ed3bbd80144fff4b954";
+    turin.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/turin_chair.zip";
+    initClient(viewer_b, iframe_b, turin.uid);
+    download(viewer_b, turin.url, progressB);
+  }
+
+  function loadExampleExterior() {
+    // Huis Bergh castle
+    var huis_berg = {};
+    huis_berg.uid = "46658345eac54243a19110a0e365e9de";
+    huis_berg.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/castle_huis_bergh_heerenberg_netherlands.zip";
+    initClient(viewer_a, iframe_a, huis_berg.uid);
+    download(viewer_a, huis_berg.url, progressA);
+
+    // Manasija castle
+    var manasija = {};
+    manasija.uid = "149ebc62cac445cd83ea6cbc42cbf77e";
+    manasija.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/manasija_castle_serbia.zip";
+    initClient(viewer_b, iframe_b, manasija.uid);
+    download(viewer_b, manasija.url, progressB);
+  }
+
+  function loadExampleInterior() {
+    // King's hall
+    var kings = {};
+    kings.uid = "d18155613363445b9b68c0c67196d98d";
+    kings.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/the_king_s_hall.zip";
+    initClient(viewer_a, iframe_a, kings.uid);
+    download(viewer_a, kings.url, progressA);
+
+    // Morning room
+    var morning = {};
+    morning.uid = "338cfb58457f41078fc8af7730b52482";
+    morning.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/the_morning_room.zip";
+    initClient(viewer_b, iframe_b, morning.uid);
+    download(viewer_b, morning.url, progressB);
+  }
+
+
+  function initClient(viewer, iframe, uid) {
+    viewer.scene = new THREE.Scene();
+    viewer.downloaded = false;
+    viewer.ready = false;
+
+    viewer.materials = [];
+    viewer.abledoTextures = [];
+    viewer.normalsTextures = [];
+    viewer.colorsTextures = [];
+
+    viewer.featureMeans = zeros(9);
+    viewer.featureStds = zeros(9);
+    viewer.featureCovariance = zeros(9, 9);
+
+    viewer.featureMeansNormal = zeros(3, 6);
+    viewer.featureStdsNormal = zeros(3, 6);
+
+    viewer.uid = uid;
+
+    viewer.client = new Sketchfab( iframe );
+    viewer.client.init( viewer.uid, {
+      success: function onSuccess(api) {
+        viewer.api = api;
+        api.start();
+        api.addEventListener( 'viewerready', function() {
+          api.getMaterialList( function (err, materials) {
+            if (!err) { viewer.materials = materials; }
+          });
+          api.getTextureList( function (err, textures) {
+            if (!err) { viewer.textures = textures; }
+          });
+          api.getSceneGraph(function(err, graph) {
+            if (!err) { viewer.graph = graph; }
+          });
+        });
+      },
+      error: function onError() {
+        console.log( 'Viewer error' );
+      },
+      autostart: 1,
+      preload: 0
+    });
+  }
+
+  // Sketchfab importer
+  var el = document.querySelector('.skfb-widget');
+  var skfbWidget = new SketchfabImporter(el, {
+    onModelSelected: function(result) {
+      var uid = result.model.uid;
+      var url = result.download.gltf.url;
+
+      // TODO: Select viewer to update
+      if (importViewer == "a") {
+        initClient(viewer_a, iframe_a, uid);
+        download(viewer_a, url, progressA);
+      }
+      else {
+        initClient(viewer_b, iframe_b, uid);
+        download(viewer_b, url, progressB);
+      }
+    }
+  });
+
+
+
+  function download(viewer, url, progressbar) {
+    sliderTransfer.disabled = true;
+    sliderTransfer.value = 0;
+    u_switchTransfer = 0.0;
+    colorTransfer();
+
+    transferViewer = "b";
+    document.getElementById('switch-arrow').setAttribute('class', 'fa fa-arrow-right');
+
+    document.getElementById('decrease-precision').disabled = true;
+    document.getElementById('increase-precision').disabled = true;
+    document.getElementById('text-precision').textContent = "Precision: 1";
+    u_precision = 32;
+
+    progressbar.innerText = 'Downloading model...';
+    progressbar.setAttribute('aria-valuenow', 0);
+    progressbar.setAttribute('style','width:'+Number(0)+'%');
+    progressbar.setAttribute('class','progress-bar');
+
+    var downloader = new Downloader(url, {
+      rewriteAssetURLs: true,
+      onProgress: function(progress) {
+        progressbar.setAttribute('aria-valuenow', progress);
+        progressbar.setAttribute('style','width:'+Number(progress)+'%');
+      }
+    });
+
+    var downloadPromise = downloader.download();
+
+    downloadPromise.then(function(assetMap) {
+      var gltfLoader = loadGltf(assetMap);
+      gltfLoader.then(function(scene){
+        viewer.scene = scene;
+        viewer.downloaded = true;
+
+        progressbar.innerText = 'Model loaded';
+        progressbar.setAttribute('aria-valuenow', 100);
+        progressbar.setAttribute('style','width:'+Number(100)+'%');
+        progressbar.setAttribute('class','progress-bar bg-success');
+
+        prepare(viewer, progressbar);
+      });
+    })
+    .catch(function(error) {
+      console.error('Can not load gltf', error);
+      progressbar.innerText = 'Can not load gltf';
+      progressbar.setAttribute('aria-valuenow', 100);
+      progressbar.setAttribute('style','width:'+Number(100)+'%');
+      progressbar.setAttribute('class','progress-bar bg-danger');
+    });
+  }
+
+
+  function prepare(viewer, progressbar) {
+    document.getElementById('decrease-precision').disabled = true;
+    document.getElementById('increase-precision').disabled = true;
+    viewer.ready = false;
+
+    progressbar.innerText = 'Computing statistics...';
+    progressbar.setAttribute('aria-valuenow', 0);
+    progressbar.setAttribute('style','width:'+Number(0)+'%');
+    progressbar.setAttribute('class','progress-bar');
+
+    var colorTransfer = new ColorTransfer(viewer, u_precision, {
+      onProgress: function(progress) {
+        progressbar.setAttribute('aria-valuenow', progress);
+        progressbar.setAttribute('style','width:'+Number(progress)+'%');
+      }
+    });
+
+    var computePromise = colorTransfer.prepare();
+
+    computePromise.then(function(stats) {
+      viewer.texSceneMap = stats.texSceneMap;
+      viewer.featureMeans = stats.featureMeans;
+      viewer.featureStds = stats.featureStds,
+      viewer.featureCovariance = stats.featureCovariance,
+      viewer.featureMeansNormal = stats.featureMeansNormal,
+      viewer.featureStdsNormal = stats.featureStdsNormal
+      viewer.ready = true;
+
+      tryAssignShaderValues();
+
+      progressbar.innerText = 'Statistics computed';
+      progressbar.setAttribute('aria-valuenow', 100);
+      progressbar.setAttribute('style','width:'+Number(100)+'%');
+      progressbar.setAttribute('class','progress-bar bg-success');
+    })
+    .catch(function(error) {
+      console.error('Can not compute stats', error);
+      progressbar.innerText = 'Can not compute stats';
+      progressbar.setAttribute('aria-valuenow', 100);
+      progressbar.setAttribute('style','width:'+Number(100)+'%');
+      progressbar.setAttribute('class','progress-bar bg-danger');
+    });
+  }
+
+
+  ////////////////////////////////////////////////////////////////////////////
+  // COMPUTE COLOR TRANSFER                                                 //
+  ////////////////////////////////////////////////////////////////////////////
+  // DEBUG
+  const normalMaterial = new THREE.ShaderMaterial( {
+    uniforms: {},
+    vertexShader: normalVertexShader(),
+    fragmentShader: colorFragmentShader()
+  });
+
+  const uvMaterial = new THREE.ShaderMaterial( {
+    uniforms: { },
+    vertexShader: uvVertexShader(),
+    fragmentShader: colorFragmentShader()
+  });
+
+
+  const colorTransferMapMaterial = new THREE.ShaderMaterial( {
+    uniforms: {
+      // Input statistics
+      _InputMeans: { value: null },
+      _InputStds: { value: null },
+      _InputMeansNormalL: { value: null },
+      _InputMeansNormalA: { value: null },
+      _InputMeansNormalB: { value: null },
+      _InputStdsNormalL: { value: null },
+      _InputStdsNormalA: { value: null },
+      _InputStdsNormalB: { value: null },
+
+      // Target statistics
+      _TargetMeans: { value: null },
+      _TargetStds: { value: null },
+      _TargetMeansNormalL: { value: null },
+      _TargetMeansNormalA: { value: null },
+      _TargetMeansNormalB: { value: null },
+      _TargetStdsNormalL: { value: null },
+      _TargetStdsNormalA: { value: null },
+      _TargetStdsNormalB: { value: null },
+
+      // Transformations
+      _TransformL: { value: null },
+      _TransformA: { value: null },
+      _TransformB: { value: null },
+      _TransformLNormal: { value: null },
+      _TransformANormal: { value: null },
+      _TransformBNormal: { value: null },
+
+      // Textures
+      albedoTex: { value: null },
+      normalTex: { value: null },
+
+      // Style transfer parameter
+      _TransferMethod: { value: 0 },
+      _SwitchTransfer: { value: 0.0 }
+		},
+    vertexShader: colorTexVertexShader(),
+    fragmentShader: colorTransferMapFragmentShader(),
+    side: THREE.DoubleSide,
+    depthTest: false
+  });
+
+
+  function tryAssignShaderValues() {
+    if(viewer_a.ready && viewer_b.ready) {
+      sliderTransfer.disabled = false;
+      // sliderTransfer.value = 0;
+      // u_switchTransfer = 0.0;
+
+      if(u_precision > 32) {
+        document.getElementById('decrease-precision').disabled = false;
+      }
+      if(u_precision < 1024) {
+        document.getElementById('increase-precision').disabled = false;
+      }
+
+      var A = null;
+      var B = null;
+      if(transferViewer == 'a') {
+        A = viewer_a;
+        B = viewer_b;
+      } else {
+        A = viewer_b;
+        B = viewer_a;
+      }
+
+      // Monge-Kantorovich computation
+      aCov = zeros(3, 3);
+      bCov = zeros(3, 3);
+      for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 3; j++) {
+          set(aCov, i, j, get(A.featureCovariance, i, j));
+          set(bCov, i, j, get(B.featureCovariance, i, j));
+        }
+      }
+      mongeKantorovich3D = closedFormMatrix(aCov, bCov);
+      mongeKantorovich9D = closedFormMatrix(A.featureCovariance, B.featureCovariance);
+
+      // Input statistics
+      colorTransferMapMaterial.uniforms._InputMeans.value = A.featureMeans;
+      colorTransferMapMaterial.uniforms._InputStds.value = A.featureStds;
+      colorTransferMapMaterial.uniforms._InputMeansNormalL.value = matrixToVector(A.featureMeansNormal, 0);
+      colorTransferMapMaterial.uniforms._InputMeansNormalA.value = matrixToVector(A.featureMeansNormal, 1);
+      colorTransferMapMaterial.uniforms._InputMeansNormalB.value = matrixToVector(A.featureMeansNormal, 2);
+      colorTransferMapMaterial.uniforms._InputStdsNormalL.value = matrixToVector(A.featureStdsNormal, 0);
+      colorTransferMapMaterial.uniforms._InputStdsNormalA.value = matrixToVector(A.featureStdsNormal, 1);
+      colorTransferMapMaterial.uniforms._InputStdsNormalB.value = matrixToVector(A.featureStdsNormal, 2);
+
+      // Target statistics
+      colorTransferMapMaterial.uniforms._TargetMeans.value = B.featureMeans;
+      colorTransferMapMaterial.uniforms._TargetStds.value = B.featureStds;
+      colorTransferMapMaterial.uniforms._TargetMeansNormalL.value = matrixToVector(B.featureMeansNormal, 0);
+      colorTransferMapMaterial.uniforms._TargetMeansNormalA.value = matrixToVector(B.featureMeansNormal, 1);
+      colorTransferMapMaterial.uniforms._TargetMeansNormalB.value = matrixToVector(B.featureMeansNormal, 2);
+      colorTransferMapMaterial.uniforms._TargetStdsNormalL.value = matrixToVector(B.featureStdsNormal, 0);
+      colorTransferMapMaterial.uniforms._TargetStdsNormalA.value = matrixToVector(B.featureStdsNormal, 1);
+      colorTransferMapMaterial.uniforms._TargetStdsNormalB.value = matrixToVector(B.featureStdsNormal, 2);
+
+      // Transformations
+      colorTransferMapMaterial.uniforms._TransformL.value = matrixToVector(mongeKantorovich3D, 0);
+      colorTransferMapMaterial.uniforms._TransformA.value = matrixToVector(mongeKantorovich3D, 1);
+      colorTransferMapMaterial.uniforms._TransformB.value = matrixToVector(mongeKantorovich3D, 2);
+      colorTransferMapMaterial.uniforms._TransformLNormal.value = matrixToVector(mongeKantorovich9D, 0);
+      colorTransferMapMaterial.uniforms._TransformANormal.value = matrixToVector(mongeKantorovich9D, 1);
+      colorTransferMapMaterial.uniforms._TransformBNormal.value = matrixToVector(mongeKantorovich9D, 2);
+
+      console.log("Shader ready.");
+      colorTransfer();
+    }
+  }
+
+  function colorTransfer() {
+    if(viewer_a.ready && viewer_b.ready) {
+      var A = null;
+      if(transferViewer == 'a') {
+        A = viewer_a;
+      } else {
+        A = viewer_b;
+      }
+
+      for (var k=0; k<A.texSceneMap.length; k++) {
+        colorTransferMapMaterial.uniforms.albedoTex.value = A.texSceneMap[k].albedoMap;
+        colorTransferMapMaterial.uniforms.normalTex.value = A.texSceneMap[k].normalMap.texture;
+
+        colorTransferMapMaterial.uniforms._TransferMethod.value = u_transferMethod;
+        colorTransferMapMaterial.uniforms._SwitchTransfer.value = u_switchTransfer;
+
+        colorTransferMapMaterial.needsUpdate = true;
+
+        // var albedo = A.texSceneMap[k].albedoMaps.images.find(tex => tex.width == u_precision);
+        var albedo = A.texSceneMap[k].albedoMaps.images.find(tex => tex.width == 1024);
+
+        var w = albedo.width;
+        var h = albedo.height;
+        A.texSceneMap[k].newColorTex = new THREE.WebGLRenderTarget(w, h, { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, depthBuffer: false});
+        var plane = new THREE.Mesh( new THREE.PlaneGeometry(), colorTransferMapMaterial );
+
+        // Compute new color texture
+        bufferScene.add(plane);
+        bufferRenderer.setRenderTarget(A.texSceneMap[k].newColorTex);
+        bufferRenderer.render(bufferScene, bufferCamera);
+        bufferRenderer.setRenderTarget(null);
+        bufferScene.remove(plane);
+
+        // Apply to model
+        updateViewerTexture(A, k);
+      }
+    }
+  }
+
+
+  function updateViewerTexture(viewer, id) {
+    // Normal tex as Image
+    var w = viewer.texSceneMap[id].newColorTex.width;
+    var h = viewer.texSceneMap[id].newColorTex.height;
+    var data = new Uint8Array( w * h * 4 );
+    bufferRenderer.readRenderTargetPixels( viewer.texSceneMap[id].newColorTex, 0, 0, w, h, data);
+
+    // Init canvas
+    var canvas = document.createElement( 'canvas' );
+    canvas.width = w;
+    canvas.height = h;
+    var context = canvas.getContext( '2d' );
+
+    // Copy the pixels to a 2D canvas
+    var imageData = context.createImageData(w, h);
+    imageData.data.set(data);
+    context.putImageData(imageData, 0, 0);
+
+    viewer.texSceneMap[id].newColorImg = new Image();
+    viewer.texSceneMap[id].newColorImg.src = canvas.toDataURL('image/png', 1.0);
+
+    // DEBUG: Update viewer textures
+    // var albedo = viewer_a.texSceneMap[id].albedoMaps.images.find(tex => tex.width == u_precision);
+    // document.getElementById('debug-image-1').src = viewer.texSceneMap[id].normalImg.src;
+    // document.getElementById('debug-image-2').src = albedo.url;
+    // document.getElementById('debug-image-3').src = viewer.texSceneMap[id].newColorImg.src;
+
+    // Update materials
+    var newURL = viewer.texSceneMap[id].newColorImg.src;
+    var oldUID = viewer.texSceneMap[id].albedoMaps.uid;
+    updateMaterials(newURL, oldUID, viewer);
+  }
+
+
+  function displayNormalTexture(viewer) {
+    // Update materials with normalsImgs
+    for (var k=0; k<viewer.texSceneMap.length; k++) {
+      var newURL = viewer.texSceneMap[k].normalImg.src;
+      var oldUID = viewer.texSceneMap[k].albedoMaps.uid;
+      updateMaterials(newURL, oldUID, viewer);
+    }
+  }
+
+  function updateMaterials(newURL, oldUID, viewer){
+    var m = null;
+    for (var k = 0; k < viewer.materials.length; k++) {
+      if (viewer.materials[k].channels.AlbedoPBR.texture) {
+        if (viewer.materials[k].channels.AlbedoPBR.texture.uid == oldUID) {
+          m = viewer.materials[k];
+          break;
+        }
+      } else if (viewer.materials[k].channels.DiffusePBR.texture) {
+        if (viewer.materials[k].channels.DiffusePBR.texture.uid == oldUID) {
+          m = viewer.materials[k];
+          break;
+        }
+      } else if (viewer.materials[k].channels.DiffuseColor.texture) {
+        if (viewer.materials[k].channels.DiffuseColor.texture.uid == oldUID) {
+          m = viewer.materials[k];
+          break;
+        }
+      }
+    }
+
+    viewer.api.updateTexture( newURL, oldUID, function(err, textureUid) {
+      if (viewer.materials[k].channels.AlbedoPBR.texture) {
+        m.channels.AlbedoPBR.texture.uid = textureUid;
+      } else if (viewer.materials[k].channels.DiffusePBR.texture) {
+        m.channels.DiffusePBR.texture.uid = textureUid;
+      } else if (viewer.materials[k].channels.DiffuseColor.texture) {
+        m.channels.DiffuseColor.texture.uid = textureUid;
+      }
+      viewer.api.setMaterial(m);
+    });
+  }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+
+<!-- HEAD -->
+<head>
+  <title>Ific Goudé</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+<!-- BODY -->
+<body data-spy="scroll" data-target="#navbarNav" data-offset="50">
+
+  <!-- Contact -->
+  <div id="home" class="container-fluid" style="background-color:#000000; color:#fff">
+
+    <!-- Choose one of Percept color randomly at start -->
+    <script>
+      // backgroundColors = ["#FCF400", "#049743", "#0097DE", "#681B80", "#EA3533", "#F0940A"];
+      backgroundColors = ["#049743", "#0097DE", "#681B80", "#EA3533", "#F0940A"];
+      col = Math.floor(Math.random() * backgroundColors.length);
+      document.getElementById("home").style.backgroundColor = backgroundColors[col];
+    </script>
+
+    <div class="d-flex align-items-start" style="height:180px">
+      <!-- Infos -->
+      <div class="mb-auto flex-grow-1">
+        <h3 style="margin-top:3px">Ific Goudé</h3>
+        <h5 style="margin-bottom:30px">Research scientist in Computer Graphics</h5>
+
+        <!-- <h6><span class="fas fa-phone"></span> 02 99 84 22 37</h6> -->
+        <h6><span class="fab fa-github"></span><a href="https://github.com/igoude" style="color:#fff"> igoude </a></h6>
+        <h6><span class="fas fa-envelope"></span> ific.goude@irisa.fr </h6>
+        <h6 class="d-none d-md-block"><span class="fas fa-map-marker"></span> IRISA, 263 Avenue Général Leclerc, 35000 Rennes, FRANCE</h6>
+      </div>
+
+      <!-- Links -->
+      <div class="d-none d-md-block h-100" style="width:150px; margin-right:8px">
+          <a href="https://www.univ-rennes1.fr/"><img class="img-fluid float-right" style="height:37%" src="images/LOGO_Univ_rennes_1.png" alt="Univ"></a>
+          <a href="https://www.irisa.fr/"       ><img class="img-fluid float-right" style="height:25%" src="images/LOGO_Irisa.png" alt="Irisa"></a>
+          <a href="http://www-percept.irisa.fr/"><img class="img-fluid float-right" style="height:30%; margin-top:5px" src="images/LOGO_Percept_white_transparent.png" alt="Percept"></a>
+      </div>
+
+      <!-- Photo -->
+      <div class="mb-auto col-auto">
+        <!-- <img class="img-thumbnail" src="images/Photo_CV.png" alt="Photo" style="margin-top:8px; height:160px"> -->
+        <img class="img-thumbnail" src="images/Photo_Vacances.jpg" alt="Photo" style="margin-top:8px; height:160px">
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav id="navbarNav" class="navbar navbar-dark bg-dark sticky-top">
+    <div class="row" style="height:50px">
+      <a class="navbar-brand" style="margin-left:15px" href="#home">Home</a>
+
+      <!-- Computer menu -->
+      <a class="nav-link d-none d-md-block" style="color:#aaa" href="#research">Research</a>
+      <a class="nav-link d-none d-md-block" style="color:#aaa" href="#publications">Publications</a>
+      <a class="nav-link d-none d-md-block" style="color:#aaa" href="#teaching">Teaching</a>
+      <a class="nav-link d-none d-md-block" style="color:#aaa" href="#background">Background</a>
+      <a class="nav-link d-none d-md-block" style="color:#0097DE" href="http://people.irisa.fr/Ific.Goude/3d-color-transfer/"> <h5><b> 3D color transfer </b></h5> </a>
+
+      <!-- Mobile menu -->
+      <div class="d-md-none nav-item dropdown">
+         <a class="nav-link dropdown-toggle" style="color:#aaa" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Menu
+         </a>
+         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+           <a class="dropdown-item" style="color:#aaa" href="#research">Research</a>
+           <a class="dropdown-item" style="color:#aaa" href="#publications">Publications</a>
+           <a class="dropdown-item" style="color:#aaa" href="#teaching">Teaching</a>
+           <a class="dropdown-item" style="color:#aaa" href="#background">Background</a>
+           <div class="dropdown-divider"></div>
+           <a class="dropdown-item" style="color:#0097DE" href="http://people.irisa.fr/Ific.Goude/3d-color-transfer/"> <h5><b> 3D color transfer </b></h5> </a>
+         </div>
+       </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div style="background-color:#fff">
+
+    <!-- Research -->
+    <div id="research" class="container-fluid">
+      <h3 style="padding-top:70px">Research</h3>
+      <div class="list-group">
+
+        <!-- Thesis -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+           <div class="row">
+            <p class="mb-1 col">
+              <b>Thesis: Rendering of HDR 3D point clouds</b> (funded by the <a href="https://revery.univ-reims.fr/">ANR ReVeRy project</a>)
+            </p>
+          </div>
+          <div class="row">
+            <p class="mb-1 col">
+              <i>The ReVeRY project will design a specific GRID OF CAMERAS, a cost-efficient system that acquires at once several viewpoints
+              under several exposures and will convert a multiview, multiexposed, video stream into a high quality rich media.</i>
+            </p>
+          </div>
+          <div class="row">
+            <p class="mb-1 col">
+              The goal is to improve the rendering quality of such HDR point clouds captured by the camera grid. <br>
+              It can be splitted into two different aspects: <br>
+              &nbsp;&nbsp; 1) The High Dynamic Range of a volumetric content, and the associated Tone Mapping issues when displaying on SDR 2D screen / HMDs. <br>
+              &nbsp;&nbsp; 2) The rendering quality of point clouds (filling holes, denoising images). <br>
+              Taking into account the artistic and aesthetic intentions during the rendering process is also a great challenge (relighting, style transfer, etc.)
+            </p>
+          </div>
+          <!-- <div class="row">
+            <a href="https://revery.univ-reims.fr/"><img class="img-fluid float-center" src="images/LOGO_Revery.png" alt="Revery"></a>
+          </div> -->
+        </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Publications -->
+    <div id="publications" class="container-fluid">
+      <h3 style="padding-top:70px">Publications</h3>
+
+      <h5>2021</h5>
+      <div class="list-group">
+
+        <!-- Example-based color transfer for 3D point clouds -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+
+          <div class="row" data-toggle="collapse" href="#collapsePCST" role="button" aria-expanded="false" aria-controls="collapsePCST">
+            <p class="mb-1 col btn btn-light text-left">
+              <b>Example-based color transfer for 3D point clouds</b> <br>
+              Ific Goudé, Rémi Cozot, Olivier Le Meur, Kadi Bouatouch <br>
+              <i>Computer Graphics Forum journal (2021), vol.40, issue 6, 428-446 </i>
+              <a href="https://doi.org/10.1111/cgf.14388">DOI</a>
+              <a href="https://hal.archives-ouvertes.fr/hal-03396448v1">HAL</a>
+            </p>
+            <a href="http://people.irisa.fr/Ific.Goude/3d-color-transfer/"><span class="col-auto fas fa-cogs" style="font-size:200%"></span></a>
+            <a href="papers/PCST/PCST.pdf" download="Goudé_2021_Point_cloud_color_transfer_paper"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
+            <a href="papers/PCST/PCST.mov" download="Goudé_2021_Point_cloud_color_transfer_video"><span class="col-auto far fa-file-video" style="font-size:200%"></span></a>
+            <a href="https://github.com/igoude/point-cloud-colour-transfer"><span class="col-auto fab fa-git" style="font-size:200%"></span></a>
+          </div>
+          <hr/>
+
+          <div class="collapse" id="collapsePCST">
+            <div class="row">
+              <p class="mb-1 col">
+                In this paper, we propose a new framework to automatically transfer the color style from a target point cloud to an input point cloud. <br>
+                Our proposed color transfer methods rely on correlations between the color distributions and the geometry of the models. <br>
+              </p>
+            </div>
+            <hr/>
+            <br>
+
+            <div class="row align-items-top">
+              <p class="mb-1 col col align-items-center">
+                <img class="img float-center" width="32%" src="papers/PCST/figures/church_input.png">
+                <img class="img float-center" width="32%" src="papers/PCST/figures/church_target.png">
+                <img class="img float-center" width="32%" src="papers/PCST/figures/church_output.png">
+                <br>
+                Rendering the church point cloud (left) with the color style of the fantasy house point cloud (middle) gives the output point cloud (right)
+              </p>
+              <p class="mb-1 col col align-items-center">
+                <img class="img float-center" width="32%" src="papers/PCST/figures/david_input.png">
+                <img class="img float-center" width="32%" src="papers/PCST/figures/david_target.png">
+                <img class="img float-center" width="32%" src="papers/PCST/figures/david_output.png">
+                <br>
+                Another example, from left to right: input point cloud, target style point cloud, output point cloud
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <h5>2020</h5>
+      <div class="list-group">
+
+        <!-- Tone mapping High Dynamic 3D scenes with global lightness coherency -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+
+          <div class="row" data-toggle="collapse" href="#collapse3DTMO" role="button" aria-expanded="false" aria-controls="collapse3DTMO">
+            <p class="mb-1 col btn btn-light text-left">
+              <b>Tone mapping High Dynamic 3D scenes with global lightness coherency</b> <br>
+              Ific Goudé, Jérémy Lacoche, Rémi Cozot <br>
+              <i>Computer & Graphics journal (2020), vol.91, 243-251 </i>
+              <a href="https://doi.org/10.1016/j.cag.2020.08.004">DOI</a>
+              <a href="https://hal.archives-ouvertes.fr/hal-03192365v1">HAL</a>
+            </p>
+            <a href="papers/3D-TMO/3D_TMO.pdf" download="Goudé_2020_3D_TMO_paper"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
+            <a href="https://github.com/igoude/3d-tmo"><span class="col-auto fab fa-git" style="font-size:200%"></span></a>
+          </div>
+          <hr/>
+
+          <div class="collapse" id="collapse3DTMO">
+            <div class="row">
+              <p class="mb-1 col">
+                We propose a new approach for real-time Tone Mapping Operator dedicated to High Dynamic Range rendering of interactive 3D scenes. <br>
+                The proposed method considers the whole scene lighting in order to preserve the global coherency.
+              </p>
+            </div>
+            <hr/>
+            <br>
+
+            <div class="row align-items-top">
+              <p class="d-none d-md-block mb-1 col col-lg-3 align-items-center">
+                <img class="img float-center" width="84%" src="papers/3D-TMO/figures/scene.png">
+                <br>
+                The 3D scene consists of two rooms, one very bright and one very dark, separated by a door
+              </p>
+              <p class="d-none d-md-block mb-1 col col-lg-4 align-items-top">
+                <img class="img float-center" width="30.5%" src="papers/3D-TMO/figures/combine1_bright.png">
+                <img class="img float-center" width="30.5%" src="papers/3D-TMO/figures/combine2_bright.png">
+                <img class="img float-center" width="30.5%" src="papers/3D-TMO/figures/combine3_bright.png">
+                <img class="img float-center" width="30.5%" src="papers/3D-TMO/figures/combine1_dark.png">
+                <img class="img float-center" width="30.5%" src="papers/3D-TMO/figures/combine2_dark.png">
+                <img class="img float-center" width="30.5%" src="papers/3D-TMO/figures/combine3_dark.png">
+                <br>
+                Comparison between Viewport TMO (left), Global TMO (right) and the combination of both TMOs (middle) for two different viewpoints in the scene
+              </p>
+              <p class="mb-1 col col-lg-5 align-items-top">
+                <img class="img float-center" width="24%" src="papers/3D-TMO/figures/our_0.png">
+                <img class="img float-center" width="24%" src="papers/3D-TMO/figures/our_1.png">
+                <img class="img float-center" width="24%" src="papers/3D-TMO/figures/our_2.png">
+                <img class="img float-center" width="24%" src="papers/3D-TMO/figures/our_3.png">
+                <img class="img float-center" width="24%" src="papers/3D-TMO/figures/eye_adapt_0.png">
+                <img class="img float-center" width="24%" src="papers/3D-TMO/figures/eye_adapt_1.png">
+                <img class="img float-center" width="24%" src="papers/3D-TMO/figures/eye_adapt_2.png">
+                <img class="img float-center" width="24%" src="papers/3D-TMO/figures/eye_adapt_3.png">
+                <br>
+                Our results (1st row) compared with the state of the art (2nd row)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- A perceptually coherent TMO for visualization of 360° HDR images on HMD -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+
+          <div class="row" data-toggle="collapse" href="#collapsePerceptualTMO" role="button" aria-expanded="false" aria-controls="collapsePerceptualTMO">
+            <p class="mb-1 col btn btn-light text-left">
+              <b>A perceptually coherent TMO for visualization of 360° HDR images on HMD</b> <br>
+              Ific Goudé, Rémi Cozot, Olivier Le Meur <br>
+              <i>Transactions on Computational Science XXXVII journal (2020), 109-128</i>
+              <a href="https://doi.org/10.1007/978-3-662-61983-4_7">DOI</a>
+              <a href="https://hal.archives-ouvertes.fr/hal-02912340v1">HAL</a>
+            </p>
+            <a href="papers/HMD-TMO/Perceptually_coherent_TMO_preprint.pdf" download="Goudé_2020_Perceptually_coherent_TMO_paper"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
+            <a href="https://github.com/igoude/hmd-tmo"><span class="col-auto fab fa-git" style="font-size:200%"></span></a>
+          </div>
+          <hr/>
+
+          <div class="collapse" id="collapsePerceptualTMO">
+            <div class="row">
+              <p class="mb-1 col">
+                We present two subjective studies to model the lightness perception on Head-Mounted Displays. <br>
+                The proposed Tone Mapping Operator is then an adaptation of the HMD-TMO that better fits with the human eye perception of the luminance on such Head-Mounted Displays.
+              </p>
+            </div>
+            <hr/>
+            <br>
+
+            <div class="row align-items-top">
+              <p class="mb-1 col align-items-center">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/1_Student_V.png">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/1_Student_C.png">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/1_Student_G.png">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/0_Student_V.png">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/0_Student_C.png">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/0_Student_G.png">
+                <br>
+                Comparison between Viewport TMO (left), Global TMO (right) and the combination of both TMOs (middle) for two different viewpoints in the scene
+              </p>
+              <p class="d-none d-md-block mb-1 col align-items-center">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/1_Modern_V.png">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/1_Modern_C.png">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/1_Modern_G.png">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/0_Modern_V.png">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/0_Modern_C.png">
+                <img class="img float-center" width="30%" src="papers/HMD-TMO/figures/0_Modern_G.png">
+                <br>
+                Another example
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <h5>2019</h5>
+      <div class="list-group">
+
+        <!-- HMD-TMO: A Tone Mapping Operator for 360 HDR Images Visualization for Head Mounted Displays -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+          <div class="row" data-toggle="collapse" href="#collapseHMDTMO" role="button" aria-expanded="false" aria-controls="collapseHMDTMO">
+            <p class="mb-1 col btn btn-light text-left">
+              <b>HMD-TMO: A Tone Mapping Operator for 360° HDR Images Visualization for Head Mounted Displays</b> <br>
+              Ific Goudé, Rémi Cozot, Francesco Banterle <br>
+              <i>Computer Graphics International conference (2019), 216-227</i>
+              <a href="https://doi.org/10.1007/978-3-030-22514-8_18">DOI</a>
+              <a href="https://hal.archives-ouvertes.fr/hal-02301430v1">HAL</a>
+            </p>
+            <a href="papers/HMD-TMO/Goudé2019_Chapter_HMD-TMOAToneMappingOperatorFor.pdf" download="Goudé_2019_HMD-TMO_paper"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
+            <a href="papers/HMD-TMO/HMD-TMO_CGI19.pdf" download="Goudé_2019_HMD-TMO_presentation"><span class="col-auto far fa-file-powerpoint" style="font-size:200%"></span></a>
+            <a href="https://github.com/igoude/hmd-tmo"><span class="col-auto fab fa-git" style="font-size:200%"></span></a>
+          </div>
+          <hr/>
+
+          <div class="collapse" id="collapseHMDTMO">
+            <div class="row">
+              <p class="mb-1 col">
+                We propose a new Tone Mapping Operator dedicated to the visualization of 360° High Dynamic Range images on Head-Mounted Displays. <br>
+                To cope with the problem of global coherency, we propose a novel Tone Mapping Operator which takes advantage of <br>
+                &nbsp;&nbsp; 1) a view-dependant tone mapping that enhances the contrast, <br>
+                &nbsp;&nbsp; 2) a Tone Mapping Operator applied to the entire 360° image that preserves the global coherency.
+              </p>
+            </div>
+            <hr/>
+            <br>
+
+            <div class="row">
+              <p class="mb-1 col col-lg-5">
+                <img class="img float-center" width="78%" src="papers/HMD-TMO/figures/TMO_Framework.png">
+                <br>
+                Our TMO framework
+              </p>
+              <p class="d-none d-md-block mb-1 col">
+                <img class="img float-center" width="24%" src="papers/HMD-TMO/figures/Tree_our.png">
+                <img class="img float-center" width="24%" src="papers/HMD-TMO/figures/Forest_our.png">
+                <img class="img float-center" width="24%" src="papers/HMD-TMO/figures/Village_our.png">
+                <img class="img float-center" width="24%" src="papers/HMD-TMO/figures/Florist_our.png">
+                <img class="img float-center" width="24%" src="papers/HMD-TMO/figures/Tree_yu.png">
+                <img class="img float-center" width="24%" src="papers/HMD-TMO/figures/Forest_yu.png">
+                <img class="img float-center" width="24%" src="papers/HMD-TMO/figures/Village_yu.png">
+                <img class="img float-center" width="24%" src="papers/HMD-TMO/figures/Florist_yu.png">
+                <br>
+                Our results (1st row) compared with the state of the art (2nd row)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Teaching -->
+    <div id="teaching" class="container-fluid">
+      <h3 style="padding-top:70px">Teaching</h3>
+      <div class="list-group">
+
+        <!-- Shaders -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+            <div class="row">
+              <p class="mb-1 col">
+                <b>Shaders</b>
+              </p>
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp; OpenGL 4 <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Vertex / Fragment shaders <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Shadow mapping <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Differed shading
+            </div>
+        </div>
+
+        <!-- Java -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+            <div class="row">
+              <p class="mb-1 col">
+                <b>Java</b>
+              </p>
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp; Object-oriented programming <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Debugging with Eclipse IDE <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Lambda expressions <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; UML diagram
+            </div>
+        </div>
+
+        <!-- Algo Graph -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+            <div class="row">
+              <p class="mb-1 col">
+                <b>Graph theory</b>
+              </p>
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp; Network flow <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Route problems <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Covering problems
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Background -->
+    <div id="background" class="container-fluid">
+      <h3 style="padding-top:70px">Background</h3>
+
+      <h5>Work experience</h5>
+      <div class="list-group">
+
+        <!-- b<>com -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+            <div class="row">
+              <p class="mb-1 col">
+                <b>R&D engineer</b> IRT b<>com (Cesson-Sévigné), <i>2017</i>
+              </p>
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp; Develop a Virtual Reality demonstrator with Unity3D <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Program scripts and shaders <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Manage project resources for a real time rendering
+            </div>
+        </div>
+
+        <!-- technicolor -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+            <div class="row">
+              <p class="mb-1 col">
+                <b>Trainee engineer</b> Technicolor (Cesson-Sévigné), <i>2016</i>
+              </p>
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp; Develop an Inverse Tone Mapping Operator based on machine learning methods
+            </div>
+        </div>
+
+        <!-- canon -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+            <div class="row">
+              <p class="mb-1 col">
+                <b>Technician assistant</b> Canon (Liffré), <i>2014</i>
+              </p>
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp; Set up an embedded computing traceability <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Python programming on a Raspberry PI
+            </div>
+        </div>
+
+      </div>
+
+      <br>
+      <h5>Training</h5>
+      <div class="list-group">
+
+        <!-- ESIR -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+            <div class="row">
+              <p class="mb-1 col">
+                <b>Engineering school in Digital Imaging</b> ESIR (University of Rennes 1), <i>2017</i>
+              </p>
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp; Special effects <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Shader programming (OpenGL) <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Ray marching <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Direct and global illumination <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Computer vision <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Image processing <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Mathematics for imagery
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</body>
+</html>
