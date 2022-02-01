@@ -25,6 +25,8 @@
       backgroundColors = ["#049743", "#0097DE", "#681B80", "#EA3533", "#F0940A"];
       col = Math.floor(Math.random() * backgroundColors.length);
       document.getElementById("home").style.backgroundColor = backgroundColors[col];
+      
+      colorTransferPath = "https://igoude.github.io/3d-color-transfer"
     </script>
 
     <div class="d-flex align-items-start" style="height:180px">
@@ -64,7 +66,7 @@
       <a class="nav-link d-none d-md-block" style="color:#aaa" href="#publications">Publications</a>
       <a class="nav-link d-none d-md-block" style="color:#aaa" href="#teaching">Teaching</a>
       <a class="nav-link d-none d-md-block" style="color:#aaa" href="#background">Background</a>
-      <a class="nav-link d-none d-md-block" style="color:#0097DE" href="http://people.irisa.fr/Ific.Goude/3d-color-transfer/"> <h5><b> 3D color transfer </b></h5> </a>
+      <a class="nav-link d-none d-md-block" style="color:#0097DE" href=colorTransferPath> <h5><b> 3D color transfer </b></h5> </a>
 
       <!-- Mobile menu -->
       <div class="d-md-none nav-item dropdown">
@@ -77,7 +79,7 @@
            <a class="dropdown-item" style="color:#aaa" href="#teaching">Teaching</a>
            <a class="dropdown-item" style="color:#aaa" href="#background">Background</a>
            <div class="dropdown-divider"></div>
-           <a class="dropdown-item" style="color:#0097DE" href="http://people.irisa.fr/Ific.Goude/3d-color-transfer/"> <h5><b> 3D color transfer </b></h5> </a>
+           <a class="dropdown-item" style="color:#0097DE" href=colorTransferPath> <h5><b> 3D color transfer </b></h5> </a>
          </div>
        </div>
     </div>
@@ -88,39 +90,52 @@
 
     <!-- Research -->
     <div id="research" class="container-fluid">
-      <h3 style="padding-top:70px">Research</h3>
+      <h3 style="padding-top:70px">Research interest</h3>
       <div class="list-group">
 
+        <!-- Keywords -->
+        <div class="list-group-item row" style="background-color:#fafafa">
+           <div class="row">
+              &nbsp;&nbsp;&nbsp;&nbsp; Visual saliency of 3D environments <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Style transfer <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Real-time rendering <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Point clouds <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; High Dynamic Range (HDR) <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Tone Mapping Operator (TMO) <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; Color Appearence Model (CAM)
+           </div>
+        </div>
+        
         <!-- Thesis -->
         <div class="list-group-item row" style="background-color:#fafafa">
            <div class="row">
-            <p class="mb-1 col">
-              <b>Thesis: Rendering of HDR 3D point clouds</b> (funded by the <a href="https://revery.univ-reims.fr/">ANR ReVeRy project</a>)
-            </p>
+             <div class="row">
+              <p class="mb-1 col">
+                <b>Thesis: Rendering of HDR 3D point clouds</b> (funded by the <a href="https://revery.univ-reims.fr/">ANR ReVeRy project</a>)
+              </p>
+            </div>
+            <div class="row">
+              <p class="mb-1 col">
+                <i>The ReVeRY project will design a specific GRID OF CAMERAS, a cost-efficient system that acquires at once several viewpoints
+                under several exposures and will convert a multiview, multiexposed, video stream into a high quality rich media.</i>
+              </p>
+            </div>
+            <div class="row">
+              <p class="mb-1 col">
+                The goal is to improve the rendering quality of such HDR point clouds captured by the camera grid. <br>
+                It can be splitted into two different aspects: <br>
+                &nbsp;&nbsp; 1) The High Dynamic Range of a volumetric content, and the associated Tone Mapping issues when displaying on SDR 2D screen / HMDs. <br>
+                &nbsp;&nbsp; 2) The rendering quality of point clouds (filling holes, denoising images). <br>
+                Taking into account the artistic and aesthetic intentions during the rendering process is also a great challenge (relighting, style transfer, etc.)
+              </p>
+            </div>
+            <a href="https://ged.univ-rennes1.fr/nuxeo/site/esupversions/d858101e-003b-4d29-9213-f38dcbd7c0e2?inline"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>   
           </div>
-          <div class="row">
-            <p class="mb-1 col">
-              <i>The ReVeRY project will design a specific GRID OF CAMERAS, a cost-efficient system that acquires at once several viewpoints
-              under several exposures and will convert a multiview, multiexposed, video stream into a high quality rich media.</i>
-            </p>
-          </div>
-          <div class="row">
-            <p class="mb-1 col">
-              The goal is to improve the rendering quality of such HDR point clouds captured by the camera grid. <br>
-              It can be splitted into two different aspects: <br>
-              &nbsp;&nbsp; 1) The High Dynamic Range of a volumetric content, and the associated Tone Mapping issues when displaying on SDR 2D screen / HMDs. <br>
-              &nbsp;&nbsp; 2) The rendering quality of point clouds (filling holes, denoising images). <br>
-              Taking into account the artistic and aesthetic intentions during the rendering process is also a great challenge (relighting, style transfer, etc.)
-            </p>
-          </div>
-          <!-- <div class="row">
-            <a href="https://revery.univ-reims.fr/"><img class="img-fluid float-center" src="images/LOGO_Revery.png" alt="Revery"></a>
-          </div> -->
         </div>
-
-        </div>
+        
       </div>
     </div>
+  </div>
 
 
     <!-- Publications -->
@@ -141,9 +156,9 @@
               <a href="https://doi.org/10.1111/cgf.14388">DOI</a>
               <a href="https://hal.archives-ouvertes.fr/hal-03396448v1">HAL</a>
             </p>
-            <a href="http://people.irisa.fr/Ific.Goude/3d-color-transfer/"><span class="col-auto fas fa-cogs" style="font-size:200%"></span></a>
-            <a href="papers/PCST/PCST.pdf" download="Goudé_2021_Point_cloud_color_transfer_paper"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
-            <a href="papers/PCST/PCST.mov" download="Goudé_2021_Point_cloud_color_transfer_video"><span class="col-auto far fa-file-video" style="font-size:200%"></span></a>
+            <a href=colorTransferPath><span class="col-auto fas fa-cogs" style="font-size:200%"></span></a>
+            <a href="https://hal.archives-ouvertes.fr/hal-03396448v1"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
+            <a href="https://youtu.be/1JaubcFWXRE"><span class="col-auto far fa-file-video" style="font-size:200%"></span></a>
             <a href="https://github.com/igoude/point-cloud-colour-transfer"><span class="col-auto fab fa-git" style="font-size:200%"></span></a>
           </div>
           <hr/>
@@ -193,7 +208,8 @@
               <a href="https://doi.org/10.1016/j.cag.2020.08.004">DOI</a>
               <a href="https://hal.archives-ouvertes.fr/hal-03192365v1">HAL</a>
             </p>
-            <a href="papers/3D-TMO/3D_TMO.pdf" download="Goudé_2020_3D_TMO_paper"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
+            <a href="https://hal.archives-ouvertes.fr/hal-03192365v1"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
+            <a href="https://youtu.be/Ew4tEfbwlgs"><span class="col-auto far fa-file-video" style="font-size:200%"></span></a>
             <a href="https://github.com/igoude/3d-tmo"><span class="col-auto fab fa-git" style="font-size:200%"></span></a>
           </div>
           <hr/>
@@ -251,7 +267,7 @@
               <a href="https://doi.org/10.1007/978-3-662-61983-4_7">DOI</a>
               <a href="https://hal.archives-ouvertes.fr/hal-02912340v1">HAL</a>
             </p>
-            <a href="papers/HMD-TMO/Perceptually_coherent_TMO_preprint.pdf" download="Goudé_2020_Perceptually_coherent_TMO_paper"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
+            <a href="https://hal.archives-ouvertes.fr/hal-02912340v1"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
             <a href="https://github.com/igoude/hmd-tmo"><span class="col-auto fab fa-git" style="font-size:200%"></span></a>
           </div>
           <hr/>
@@ -306,7 +322,7 @@
               <a href="https://doi.org/10.1007/978-3-030-22514-8_18">DOI</a>
               <a href="https://hal.archives-ouvertes.fr/hal-02301430v1">HAL</a>
             </p>
-            <a href="papers/HMD-TMO/Goudé2019_Chapter_HMD-TMOAToneMappingOperatorFor.pdf" download="Goudé_2019_HMD-TMO_paper"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
+            <a href="https://hal.archives-ouvertes.fr/hal-02301430v1"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
             <a href="papers/HMD-TMO/HMD-TMO_CGI19.pdf" download="Goudé_2019_HMD-TMO_presentation"><span class="col-auto far fa-file-powerpoint" style="font-size:200%"></span></a>
             <a href="https://github.com/igoude/hmd-tmo"><span class="col-auto fab fa-git" style="font-size:200%"></span></a>
           </div>
