@@ -21,15 +21,16 @@
 
     <!-- Choose one of Percept color randomly at start -->
     <script>
-      // backgroundColors = ["#FCF400", "#049743", "#0097DE", "#681B80", "#EA3533", "#F0940A"];
-      backgroundColors = ["#049743", "#0097DE", "#681B80", "#EA3533", "#F0940A"];
-      col = Math.floor(Math.random() * backgroundColors.length);
+      // var backgroundColors = ["#FCF400", "#049743", "#0097DE", "#681B80", "#EA3533", "#F0940A"];
+      var backgroundColors = ["#049743", "#0097DE", "#681B80", "#EA3533", "#F0940A"];
+      var col = Math.floor(Math.random() * backgroundColors.length);
       document.getElementById("home").style.backgroundColor = backgroundColors[col];
       
       // TODO: fix the link call
-      colorTransferPath = "https://igoude.github.io/3d-color-transfer"
+      var colorTransferPath = "https://igoude.github.io/3d-color-transfer";
+      document.getElementById("3Dlink").href = colorTransferPath;
     </script>
-
+    
     <div class="d-flex align-items-start" style="height:180px">
       <!-- Infos -->
       <div class="mb-auto flex-grow-1">
@@ -67,7 +68,7 @@
       <a class="nav-link d-none d-md-block" style="color:#aaa" href="#publications">Publications</a>
       <a class="nav-link d-none d-md-block" style="color:#aaa" href="#teaching">Teaching</a>
       <a class="nav-link d-none d-md-block" style="color:#aaa" href="#background">Background</a>
-      <a class="nav-link d-none d-md-block" style="color:#0097DE" href="#colorTransferPath"> <h5><b> 3D color transfer </b></h5> </a>
+      <a id="3Dlink" class="nav-link d-none d-md-block" style="color:#0097DE"> <h5><b> 3D color transfer </b></h5> </a>
 
       <!-- Mobile menu -->
       <div class="d-md-none nav-item dropdown">
@@ -80,7 +81,7 @@
            <a class="dropdown-item" style="color:#aaa" href="#teaching">Teaching</a>
            <a class="dropdown-item" style="color:#aaa" href="#background">Background</a>
            <div class="dropdown-divider"></div>
-           <a class="dropdown-item" style="color:#0097DE" href="#colorTransferPath"> <h5><b> 3D color transfer </b></h5> </a>
+           <a id="3Dlink" class="dropdown-item" style="color:#0097DE"> <h5><b> 3D color transfer </b></h5> </a>
          </div>
        </div>
     </div>
@@ -163,7 +164,7 @@
               <a href="https://doi.org/10.1111/cgf.14388">DOI</a>
               <!-- <a href="https://hal.archives-ouvertes.fr/hal-03396448v1">HAL</a> -->
             </p>
-            <a href="#colorTransferPath"><span class="col-auto fas fa-cogs" style="font-size:200%"></span></a>
+            <a id="3Dlink"><span class="col-auto fas fa-cogs" style="font-size:200%"></span></a>
             <a href="https://hal.archives-ouvertes.fr/hal-03396448v1"><span class="col-auto far fa-file-pdf" style="font-size:200%"></span></a>
             <a href="https://youtu.be/1JaubcFWXRE"><span class="col-auto far fa-file-video" style="font-size:200%"></span></a>
             <a href="https://github.com/igoude/point-cloud-colour-transfer"><span class="col-auto fab fa-git" style="font-size:200%"></span></a>
