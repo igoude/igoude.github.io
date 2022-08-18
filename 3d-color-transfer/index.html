@@ -17,7 +17,7 @@
   <script type="text/javascript" src="./js/three.js"></script>
   <script type="text/javascript" src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
   <script type="text/javascript" src="./js/OrbitControls.js"></script>
-  <script type="text/javascript" src="http://mlweb.loria.fr/lalolib.js"></script>
+  <script type="text/javascript" src="https://mlweb.loria.fr/lalolib.js"></script>
 
   <script type="text/javascript" src="./js/Utils.js"></script>
   <script type="text/javascript" src="./js/Downloader.js"></script>
@@ -292,14 +292,16 @@
     // Chair
     var chair = {};
     chair.uid = "81f02b969bca49d6b028477714e8e989";
-    chair.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/chair.zip";
+    // chair.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/chair.zip";
+    chair.url = "https://raw.githubusercontent.com/igoude/igoude.github.io/main/3d-color-transfer/models/chair.zip";
     initClient(viewer_a, iframe_a, chair.uid);
     download(viewer_a, chair.url, progressA);
 
     // Turin chair
     var turin = {};
     turin.uid = "cf555eea9d634ed3bbd80144fff4b954";
-    turin.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/turin_chair.zip";
+    // turin.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/turin_chair.zip";
+    turin.url = "https://raw.githubusercontent.com/igoude/igoude.github.io/main/3d-color-transfer/models/turin_chair.zip";
     initClient(viewer_b, iframe_b, turin.uid);
     download(viewer_b, turin.url, progressB);
   }
