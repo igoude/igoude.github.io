@@ -190,7 +190,8 @@ ColorTransfer.prototype = {
     _findGraphDepth: function(node, depth) {
       var result = depth;
 
-      // console.log(node);
+      console.log(node);
+      
       // if(node){
         if (node.children) {
           for (var i = 0; i < node.children.length; i++) {
