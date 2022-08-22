@@ -9,14 +9,10 @@
     <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.10.1.js"></script>
     <script type="text/javascript" src="https://apps.sketchfab.com/web-importer/sketchfab-importer.js"></script>
 
-    <!-- <script type="text/javascript" src="https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/js/three.js"></script> -->
     <script type="text/javascript" src="https://cdn.rawgit.com/mrdoob/three.js/r135/build/three.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/mrdoob/three.js/r135/examples/js/loaders/GLTFLoader.js"></script>
     <script type="text/javascript" src="https://mlweb.loria.fr/lalolib.js"></script>
 
-    <!-- <script type="text/javascript" src="https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/js/z-worker.js"></script> -->
-    <!-- <script type="text/javascript" src="https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/js/inflate.js"></script> -->
-    <!-- <script type="text/javascript" src="https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/js/deflate.js"></script> -->
     <script type="text/javascript" src="https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/js/zip.js"></script>
     <script> zip.workerScriptsPath = "https://igoude.github.io/3d-color-transfer/js/";</script>
 
@@ -50,8 +46,8 @@
       <div class="col-2 pt-3 pl-4">
         <div class="row pl-3">
           <h2> 3D color transfer </h2>
-          <h3 style="color:#EE0000"> under maintenance! </h3>
-          <p style="color:#EE0000"> Sorry, something has broken... I'm on it! </h3>
+          <!-- <h3 style="color:#EE0000"> under maintenance! </h3> -->
+          <!-- <p style="color:#EE0000"> Sorry, something has broken... I'm on it! </h3> -->
         </div>
 
 
@@ -96,22 +92,22 @@
                 <select class="custom-select" name="method" id="select-method">
                   <option value="0">IGD</option>
                   <option value="1">MGD</option>
-                  <option value="2">IGD_N</option>
+                  <option value="2">IGD_N (wip)</option>
                   <option value="3" selected>MGD_N</option>
                 </select>
               </div>
 
               <div class="col-2">
                 <label for="switchTransfer"><h5>Transfer</h5></label>
-                <span class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom"
+                <span class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom; left"
                 title="The transfer is able when both models are loaded."></span>
                 <input type="range" class="custom-range" min="0" max="100" value="0" id="switchTransfer" disabled>
               </div>
 
               <div class="col-6 px-5">
                 <div class="row justify-content-end">
-                  <span class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom"
-                  title="Improve the color transfer by increasing the precision... it may take a while."></span>
+                  <span class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom; left"
+                  title="Improve the color transfer by increasing the precision... computing stati may take a while."></span>
                   <p class="ml-1 mr-3" id="text-precision">Precision: 1</p>
 
                   <button type="button" class="border btn btn-light btn-sm mr-1" style="height: 50%" id="decrease-precision" disabled>

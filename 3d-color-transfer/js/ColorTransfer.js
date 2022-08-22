@@ -190,8 +190,9 @@ ColorTransfer.prototype = {
     _findGraphDepth: function(node, depth) {
       var result = depth;
 
+      // logging node removed a "node undefined" for some reason...
       console.log(node);
-      
+
       // if(node){
         if (node.children) {
           for (var i = 0; i < node.children.length; i++) {
