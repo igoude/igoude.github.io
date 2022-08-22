@@ -33,7 +33,7 @@
 
 	var Reader = zip.Reader;
 	var Writer = zip.Writer;
-	
+
 	var ZipDirectoryEntry;
 
 	var appendABViewSupported;
