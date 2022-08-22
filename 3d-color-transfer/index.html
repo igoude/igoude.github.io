@@ -99,15 +99,15 @@
 
               <div class="col-2">
                 <label for="switchTransfer"><h5>Transfer</h5></label>
-                <span class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom; left"
+                <span class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom"
                 title="The transfer is able when both models are loaded."></span>
                 <input type="range" class="custom-range" min="0" max="100" value="0" id="switchTransfer" disabled>
               </div>
 
               <div class="col-6 px-5">
                 <div class="row justify-content-end">
-                  <span class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom; left"
-                  title="Improve the color transfer by increasing the precision... computing stati may take a while."></span>
+                  <span class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom"
+                  title="Improve the color transfer by increasing the precision... computing statistics may take a while."></span>
                   <p class="ml-1 mr-3" id="text-precision">Precision: 1</p>
 
                   <button type="button" class="border btn btn-light btn-sm mr-1" style="height: 50%" id="decrease-precision" disabled>
@@ -276,14 +276,14 @@
     // Mossy stamp
     var mossy_stump = {};
     mossy_stump.uid = "f0c8eb392c3945bcb5da60b9fae4396d";
-    mossy_stump.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/mossy_stump.zip";
+    mossy_stump.url = "https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/models/mossy_stump.zip";
     initClient(viewer_a, iframe_a, mossy_stump.uid);
     download(viewer_a, mossy_stump.url, progressA);
 
     // Bodhi
     var bodhisattva = {};
     bodhisattva.uid = "062edd8db2324facb86c92bf2e81cdbc";
-    bodhisattva.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/bodhisattva.zip";
+    bodhisattva.url = "https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/models/bodhisattva.zip";
     initClient(viewer_b, iframe_b, bodhisattva.uid);
     download(viewer_b, bodhisattva.url, progressB);
   }
@@ -293,7 +293,6 @@
     var chair = {};
     chair.uid = "81f02b969bca49d6b028477714e8e989";
     chair.url = "https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/models/chair.zip";
-    // chair.url = "./models/chair.zip";
     initClient(viewer_a, iframe_a, chair.uid);
     download(viewer_a, chair.url, progressA);
 
@@ -301,7 +300,6 @@
     var turin = {};
     turin.uid = "cf555eea9d634ed3bbd80144fff4b954";
     turin.url = "https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/models/turin_chair.zip";
-    // turin.url = "./models/turin_chair.zip";
     initClient(viewer_b, iframe_b, turin.uid);
     download(viewer_b, turin.url, progressB);
   }
@@ -310,14 +308,14 @@
     // Huis Bergh castle
     var huis_berg = {};
     huis_berg.uid = "46658345eac54243a19110a0e365e9de";
-    huis_berg.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/castle_huis_bergh_heerenberg_netherlands.zip";
+    huis_berg.url = "https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/models/castle_huis_bergh_heerenberg_netherlands.zip";
     initClient(viewer_a, iframe_a, huis_berg.uid);
     download(viewer_a, huis_berg.url, progressA);
 
     // Manasija castle
     var manasija = {};
     manasija.uid = "149ebc62cac445cd83ea6cbc42cbf77e";
-    manasija.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/manasija_castle_serbia.zip";
+    manasija.url = "https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/models/manasija_castle_serbia.zip";
     initClient(viewer_b, iframe_b, manasija.uid);
     download(viewer_b, manasija.url, progressB);
   }
@@ -326,14 +324,14 @@
     // King's hall
     var kings = {};
     kings.uid = "d18155613363445b9b68c0c67196d98d";
-    kings.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/the_king_s_hall.zip";
+    kings.url = "https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/models/the_king_s_hall.zip";
     initClient(viewer_a, iframe_a, kings.uid);
     download(viewer_a, kings.url, progressA);
 
     // Morning room
     var morning = {};
     morning.uid = "338cfb58457f41078fc8af7730b52482";
-    morning.url = "http://people.irisa.fr/Ific.Goude/3d-color-transfer/models/the_morning_room.zip";
+    morning.url = "https://cdn.rawgit.com/igoude/igoude.github.io/main/3d-color-transfer/models/the_morning_room.zip";
     initClient(viewer_b, iframe_b, morning.uid);
     download(viewer_b, morning.url, progressB);
   }
